@@ -17,6 +17,30 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//string
 Route::get('coba',function() {
     return "Haloooo";
+});
+
+//array
+Route::get('coba1', function(){
+    return ['gunan', 'ari', 'rahmat'];
+});
+//object json
+Route::get('coba2', function(){
+    return [
+        'Nama' => 'Muhammad Fauzil',
+        'Kelas' => 'XII RPL 5',
+        'NIS' => 3103120146
+    ];
+});
+//object json
+Route::get('coba3', function(){
+    return response()->json(
+        [
+            'Nama' => 'Muhammad Fauzil',
+            'Kelas' => 'XII RPL 5',
+            'NIS' => 3103120146
+        ],201
+        );
 });

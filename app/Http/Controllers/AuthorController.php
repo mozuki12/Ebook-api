@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use Illuminate\Http\Request;
-use App\Models\Book;
 
-class BookController extends Controller
+class AuthorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        $book = Book::all();
-        return $book;
+        $author = Author::all();
+        return $author;
     }
 
     /**
@@ -36,33 +36,34 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        $book = new Book();
-        $book->title = $request->input('title');
-        $book->description = $request->input('description');
-        $book->author = $request->input('author');
-        $book->publisher = $request->input('publisher');
-        $book->date_of_issue = $request->input('date_of_issue');
-        $book->save();
+        $author = new Author();
+        $author->name = $request->input('name');
+        $author->date_of_birth = $request->input('date_of_birth');
+        $author->place_of_birth = $request->input('place_of_birth');
+        $author->gender = $request->input('gender');
+        $author->email = $request->input('email');
+        $author->hp = $request->input('hp');
+        $author->save();
 
         return response()->json([
             'status' => 201,
-            'data' => $book
+            'data' => $author
         ],201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Author  $author
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $book = book::find($id);
-        if ($book) {
+        $author = Author::find($id);
+        if ($author) {
             return response()->json([
                 'status' => 200,
-                'data' => $book
+                'data' => $author
 
             ], 200);
         } else {
@@ -76,10 +77,10 @@ class BookController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Author $author)
     {
         //
     }
@@ -88,22 +89,23 @@ class BookController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Author  $author
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $book = book::find($id);
-        if($book){
-            $book->title = $request->title ? $request->title : $book->title;
-            $book->description = $request->description ? $request->description : $book->description;
-            $book->author = $request->author ? $request->author : $book->author;
-            $book->publisher = $request->publisher ? $request->publisher : $book->publisher;
-            $book->date_of_issue = $request->date_of_issue ? $request->date_of_issue : $book->date_of_issue;
-            $book->save();
+        $author = Author::find($id);
+        if($author){
+            $author->name = $request->name ? $request->name : $author->name;
+            $author->date_of_birth = $request->date_of_birth ? $request->date_of_birth : $author->date_of_birth;
+            $author->place_of_birth = $request->place_of_birth ? $request->place_of_birth : $author->place_of_birth;
+            $author->gender = $request->gender ? $request->gender : $author->gender;
+            $author->email = $request->email ? $request->email : $author->email;
+            $author->hp = $request->hp ? $request->hp : $author->hp;
+            $author->save();
             return response()->json([
                 'status' => 200,
-                'data' => $data
+                'data' => $author
             ],200);
 
         }else{
@@ -117,17 +119,17 @@ class BookController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Author  $author
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $book = book::where('id',$id)->first();
-        if($book){
-            $book->delete();
+        $author = Author::where('id',$id)->first();
+        if($author){
+            $author->delete();
             return response()->json([
                 'status' =>200,
-                'data'=> $book
+                'data'=> $author
             ],200);
         }else{
             return response()->json([

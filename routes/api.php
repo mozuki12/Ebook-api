@@ -26,9 +26,9 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
 Route::get('/books', [BookController::class, 'index']);
-Route::get('/Books/{id}', [BookController::class, 'show']);
-Route::get('/Authros', [AuthorController::class, 'index']);
-Route::get('/Authors/{id}', [AuthorController::class, 'show']);
+Route::get('/books/{id}', [BookController::class, 'show']);
+Route::get('/authors', [AuthorController::class, 'index']);
+Route::get('/authors/{id}', [AuthorController::class, 'show']);
 
 // protected routes
 Route::middleware('auth:sanctum')->group(function () {

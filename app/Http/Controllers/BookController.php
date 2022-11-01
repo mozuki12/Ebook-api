@@ -103,7 +103,7 @@ class BookController extends Controller
             $book->save();
             return response()->json([
                 'status' => 200,
-                'data' => $data
+                'data' => $book
             ],200);
 
         }else{
